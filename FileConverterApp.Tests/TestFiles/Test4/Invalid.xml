@@ -1,0 +1,7 @@
+<root>
+    <element1>
+        <subelement>Content</subelement>
+    </element1>
+    <element2>Missing closing tag
+    <element3>Invalid nesting
+</root>

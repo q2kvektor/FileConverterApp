@@ -1,0 +1,42 @@
+﻿@page
+@using FileConverter.Client.Services;
+@model IndexModel
+@inject IResultService service
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1>Convert XML to JSON</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Please enter upload the XML files you would like converted to JSON and saved to your local drive!</div>
+        <br />
+        <div class="panel-body">
+            <form method="POST" name="upload_form" asp-action="UploadFIles" enctype="multipart/form-data">
+                <input type="file" multiple="multiple" id="fileToUpload" name="file">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <br />
+        </div>
+    </div>
+
+    @if(service.ResultsFailed.Count == 0 && service.isProcessDone)
+    {
+        <div class="alert alert-success" role="alert" id="success_result">
+            All files were uploaded successfully
+        </div>
+        service.isProcessDone = false;
+    }
+    @if (service.ResultsFailed.Count > 0 && service.isProcessDone)
+    {
+        foreach(var failedResult in service.ResultsFailed)
+        {
+            <div class="alert alert-danger" role="alert" id="error_result">
+               @failedResult.fileName @failedResult.message
+            </div>
+        }
+        service.isProcessDone = false;
+    }
+
+
