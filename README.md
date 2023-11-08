@@ -11,6 +11,7 @@ The project contains currently only one API call which is of the type HttpPost t
 The return object will have an error message complemented with an ID as well as the file name correlating to the message.
 
 The Post method accepts an object as a paramenter which consists of two lists - IFormFile and string, for the file and the name of the file.
+
 Post model properties
 ```csharp
     public List<IFormFile> formFiles { get; set; }
